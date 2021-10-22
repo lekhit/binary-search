@@ -46,10 +46,28 @@ void list::sort(){
   //if list is empty return
   if (start==NULL)
   return;
+  //setting i to 2nd element
+  //setting  q to 1st element
   node *i=start->link,*q=start;
 while(i!=NULL){
+  //if the previous data is bigger than current data
   if (q->data>i->data){
-
+    node *j1=NULL,*temp=i;
+    //find the position of nodes between which we need to insert current node
+    position(&j1,&i);
+    //moving i to next node
+    i=i->link;
+    q->link=temp->link;
+//if returned value of position is NULL then we are inserting at starting position
+    if (j1==NULL){
+      temp->link=start;
+      start=temp;
+    }
+    // inserting between two nodes
+    else{
+      temp->link=j1->link;
+      j1->link=temp;
+    }
   }
   else{
     q=i;
@@ -89,10 +107,15 @@ int main(){
   lt.append(i);
   lt.append(2);
   lt.append(3);
+  lt.append(-1);
+  cout<<"original list:"<<endl;
   lt.display();
-  node *k=new node;
-  node* j1=new node;
-  k->data=2;
-  lt.position(&j1,&k);
-  cout<<j1->link->data<<endl;
+  lt.sort();
+  cout<<"list after sorting"<<endl;
+  lt.display();
+  // node *k=new node;
+  // node* j1=new node;
+  // k->data=2;
+  // lt.position(&j1,&k);
+  // cout<<j1->data<<endl;
 }
