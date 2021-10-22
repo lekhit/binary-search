@@ -2,16 +2,19 @@
 using namespace std;
 
 //creating list class
-class list{
-  // node for storing data and next link
   struct node{
 int data;
 node *link;
 }
 //used two nodes to keep track of start and end point of list.
 //end node is very useful because it facilitates O(1) runtime for appending compared to O(n) runtime required in case if only start node is used. 
-*start,*end;
- public:
+;
+
+class list{
+   public:
+  // node for storing data and next link
+struct node *start,*end;
+
  //constructor used to set start to null
   list(){
     start=NULL;
@@ -27,8 +30,36 @@ node *link;
  }
   void append(int num);
   void display();
-
+  void sort();
+  void position(node**,node**);
 };
+void list::position(node **j1,node **i){
+  
+  if (start==NULL)
+  return ;
+  for (node *j=start;j!=*i;j=j->link)
+  {if (j->data > (*i)->data)
+  return ;
+  *j1=j;}
+}
+void list::sort(){
+  //if list is empty return
+  if (start==NULL)
+  return;
+  node *i=start->link,*q=start;
+while(i!=NULL){
+  if (q->data>i->data){
+
+  }
+  else{
+    q=i;
+    i=i->link;
+  }
+}
+
+  
+  
+}
 void list::append(int num){
   //create new node
   node *item=new node;
@@ -59,4 +90,9 @@ int main(){
   lt.append(2);
   lt.append(3);
   lt.display();
+  node *k=new node;
+  node* j1=new node;
+  k->data=2;
+  lt.position(&j1,&k);
+  cout<<j1->link->data<<endl;
 }
